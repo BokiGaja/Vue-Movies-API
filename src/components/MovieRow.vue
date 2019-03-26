@@ -1,6 +1,5 @@
 <template>
-    <div class="container">
-        <div class="card text-center" style="margin: 10px auto" v-for="(movie, index) in movies" :key="movie.id">
+        <div class="card text-center" style="margin: 10px auto">
             <div class="card-header">
                 Director: {{ movie.director }}
             </div>
@@ -12,14 +11,13 @@
                 <p class="card-text">Genre: {{ movie.genre }} </p>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
     export default {
         name: "MovieRow",
         props: {
-            movies: Array
+            movie: {}
         }
     }
 </script>

@@ -1,7 +1,9 @@
 <template>
     <div class="container">
         <h1>Movies</h1>
-        <movie-row :movies="movies"/>
+        <ul v-for="movie in movies" :key="movie.id">
+            <movie-row :movie="movie"/>
+        </ul>
     </div>
 </template>
 
