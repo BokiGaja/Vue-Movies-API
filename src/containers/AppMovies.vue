@@ -2,8 +2,14 @@
     <div class="container">
         <h1>Movies</h1>
         <movie-search @searching="search"/>
+        <div class="card text-white bg-success mb-3" style="max-width: 18rem; margin: auto" v-if="moviesCounter>0">
+            <div class="card-header" style="text-align: center">Movies counted</div>
+            <div class="card-body">
+                <h5 class="card-title" style="text-align: center">{{ moviesCounter }}</h5>
+            </div>
+        </div>
         <ul v-for="movie in movies" :key="movie.id">
-            <movie-row :movie="movie"/>
+            <movie-row :movie="movie" @movieSelected="moviesCounter++" @movieDeselected="moviesCounter--"/>
         </ul>
         <!-- This can be separate component -->
         <div v-if="noMovie" style="background-color: red; width: 300px; border-radius: 10%; margin: auto; color: white">
@@ -23,7 +29,8 @@
                 movies: [],
                 initMovies: [],
                 searchParams: '',
-                noMovie: false
+                noMovie: false,
+                moviesCounter: 0
             }
         },
 
