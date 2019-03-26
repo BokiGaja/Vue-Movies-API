@@ -1,5 +1,5 @@
 import VueRouter from 'vue-router';
-import AppMovies from './components/AppMovies';
+import AppMovies from './containers/AppMovies';
 
 const routes = [
     { path: '*', redirect: '/movies'},

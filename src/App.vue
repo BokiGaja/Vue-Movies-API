@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <app-nav-bar/>
+    <app-navbar/>
     <img alt="Vue logo" src="./assets/logo.png">
     <router-view/>
   </div>
 </template>
 
 <script>
-import NavBar from './layouts/AppNavbar'
+import AppNavbar from './layouts/AppNavbar'
 export default {
   name: 'app',
   components: {
-      appNavBar: NavBar
+      AppNavbar
   }
 }
 </script>
