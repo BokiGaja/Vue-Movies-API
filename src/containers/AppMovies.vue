@@ -8,8 +8,15 @@
                 <h5 class="card-title" style="text-align: center">{{ moviesCounter }}</h5>
             </div>
         </div>
+        <button class="btn btn-success" @click="selectedAll = true">Select All</button>
+        <button class="btn btn-danger" @click="selectedAll = false">Deselect All</button>
         <ul v-for="movie in movies" :key="movie.id">
-            <movie-row :movie="movie" @movieSelected="moviesCounter++" @movieDeselected="moviesCounter--"/>
+            <movie-row
+                    :selectedAll="selectedAll"
+                    :movie="movie"
+                    @movieSelected="moviesCounter++"
+                    @movieDeselected="moviesCounter--"
+            />
         </ul>
         <!-- This can be separate component -->
         <div v-if="noMovie" style="background-color: red; width: 300px; border-radius: 10%; margin: auto; color: white">
@@ -30,15 +37,14 @@
                 initMovies: [],
                 searchParams: '',
                 noMovie: false,
-                moviesCounter: 0
+                moviesCounter: 0,
+                selectedAll: null
             }
         },
-
         components: {
             MovieRow,
             MovieSearch
         },
-
         watch: {
             searchParams(newValue, oldValue) {
                 let oldState = [...this.initMovies];
@@ -50,17 +56,13 @@
                     this.movies = newState;
                     this.noMovie = true;
                 }
-
-            }
+            },
         },
-
-
         methods: {
             search(value) {
                 this.searchParams = value;
             }
         },
-
         async beforeRouteEnter(to, from, next) {
             const { data } = await moviesService.getAll();
             next(vm => {
