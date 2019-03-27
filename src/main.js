@@ -9,7 +9,8 @@ import VueRouter from 'vue-router'
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
 Vue.use(VueRouter);
-Vue.prototype.$sortArrAlphabetically = ((property) => {
+Vue.prototype.$sortArrAlphabetically = ((property, type) => {
+    if (type === 'desc') property = '-' + property;
     let sortOrder = 1;
     if (property[0] === '-') {
         sortOrder = -1;

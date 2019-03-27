@@ -12,7 +12,6 @@
                 searchParams: ''
             }
         },
-
         watch: {
             searchParams(newValue, oldValue) {
                 this.$emit('searching', this.searchParams);

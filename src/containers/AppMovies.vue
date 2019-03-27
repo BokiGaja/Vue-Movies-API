@@ -20,12 +20,14 @@
         <button class="btn btn-info" @click="sortArr('durDesc')">Sort by Duration desc</button>
         <!-- Movies -->
         <ul v-for="(movie, index) in movies" :key="movie.id" v-if="index+1 <= currPage*5 && index+1 > (currPage-1)*5">
-            <movie-row
+            <li>
+                <movie-row
                     :selectedAll="selectedAll"
                     :movie="movie"
                     @movieSelected="moviesCounter++"
                     @movieDeselected="moviesCounter--"
-            />
+                />
+            </li>
         </ul>
         <div class="container">
             <div class="row" style="width: 100px; margin: auto" >
@@ -70,10 +72,10 @@
                 if (newState.length > 0) {
                     this.movies = newState;
                     this.noMovie = false;
-                } else {
-                    this.movies = newState;
-                    this.noMovie = true;
+                    return;
                 }
+                this.movies = newState;
+                this.noMovie = true;
             },
         },
         methods: {
@@ -83,29 +85,34 @@
 
             sortArr(name) {
                 let oldState = [...this.initMovies];
-                if (name === 'nameAsc') {
-                    this.movies = oldState.sort(this.$sortArrAlphabetically('title'));
-                }
-                if (name === 'nameDesc') {
-                    this.movies = oldState.sort(this.$sortArrAlphabetically('-title'));
-                }
-                if (name === 'durAsc') {
-                    const newState = oldState.map(el => {
-                        return {
-                        ...el,
-                        duration: parseInt(el.duration)
-                        }
-                    });
-                    this.movies = newState.sort((a,b) => a.duration > b.duration ? 1 : -1);
-                }
-                if (name === 'durDesc') {
-                    const newState = oldState.map(el => {
-                        return {
-                        ...el,
-                        duration: parseInt(el.duration)
-                        }
-                    });
-                    this.movies = newState.sort((a,b) => a.duration < b.duration ? 1 : -1);
+                let newState = [];
+                switch (name) {
+                    case 'nameAsc':
+                        this.movies = oldState.sort(this.$sortArrAlphabetically('title', 'asc'));
+                        break;
+                    case 'nameDesc':
+                        this.movies = oldState.sort(this.$sortArrAlphabetically('title', 'desc'));
+                        break;
+                    case 'durAsc':
+                        newState = oldState.map(el => {
+                            return {
+                                ...el,
+                                duration: parseInt(el.duration)
+                            }
+                        });
+                        this.movies = newState.sort((a,b) => a.duration > b.duration ? 1 : -1);
+                        break;
+                    case 'durDesc':
+                        newState = oldState.map(el => {
+                            return {
+                                ...el,
+                                duration: parseInt(el.duration)
+                            }
+                        });
+                        this.movies = newState.sort((a,b) => a.duration < b.duration ? 1 : -1);
+                        break;
+                    default:
+                        return;
                 }
             },
             changePage(nextPage) {

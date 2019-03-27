@@ -19,7 +19,7 @@
     export default {
         name: "MovieRow",
         props: {
-            movie: {},
+            movie: Object,
             selectedAll: Boolean
         },
         data() {
