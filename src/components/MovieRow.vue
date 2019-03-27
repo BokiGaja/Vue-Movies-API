@@ -10,7 +10,8 @@
       <p class="card-text">Release Date: {{ movie.releaseDate }} </p>
       <p class="card-text">Genre: {{ movie.genre }} </p>
       <button class="btn btn-primary" @click="selectMovie(movie.id)">
-        {{ selected ? 'Unselect' : 'Select Movie'}}</button>
+        {{ selected ? 'Unselect' : 'Select Movie'}}
+      </button>
     </div>
   </div>
 </template>

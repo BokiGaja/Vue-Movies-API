@@ -3,8 +3,10 @@ import App from './App.vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import BootstrapVue from 'bootstrap-vue'
-import { router } from "./routes"
 import VueRouter from 'vue-router'
+
+import {router} from "./routes"
+import {store} from "./store/store";
 
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
@@ -16,7 +18,7 @@ Vue.prototype.$sortArrAlphabetically = ((property, type) => {
     sortOrder = -1;
     property = property.substr(1);
   }
-  return (a,b) => {
+  return (a, b) => {
     if (sortOrder === -1) {
       return b[property].localeCompare(a[property])
     } else {
@@ -26,6 +28,7 @@ Vue.prototype.$sortArrAlphabetically = ((property, type) => {
 });
 
 new Vue({
+  store,
   router,
   render: h => h(App),
 }).$mount('#app')
