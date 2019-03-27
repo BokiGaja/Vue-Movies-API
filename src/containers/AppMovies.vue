@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <h1>Movies</h1>
-    <movie-search @searching="search"/>
     <!-- Movies counter -->
     <div class="card text-white bg-success mb-3" style="max-width: 18rem; margin: auto" v-if="moviesCounter>0">
       <div class="card-header" style="text-align: center">Movies counted</div>
@@ -46,7 +45,6 @@
 <script>
   import {moviesService} from "../services/Movies"
   import MovieRow from '../components/MovieRow'
-  import MovieSearch from '../components/MovieSearch'
   import {mapGetters} from 'vuex'
 
   export default {
@@ -62,8 +60,7 @@
       }
     },
     components: {
-      MovieRow,
-      MovieSearch
+      MovieRow
     },
     computed: {
       ...mapGetters([
