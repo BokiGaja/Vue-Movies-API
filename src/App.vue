@@ -7,13 +7,13 @@
 </template>
 
 <script>
-import AppNavbar from './layouts/AppNavbar'
-export default {
-  name: 'app',
-  components: {
+  import AppNavbar from './layouts/AppNavbar'
+  export default {
+    name: 'app',
+    components: {
       AppNavbar
-  },
-}
+    },
+  }
 </script>
 
 <style>
