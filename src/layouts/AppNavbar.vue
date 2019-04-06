@@ -11,14 +11,16 @@
       <router-link :to="{name: 'login'}" class="btn btn-outline-success" type="button"
                    style="background-color: black; margin-right: 20px" v-if="!loggedIn">Login
       </router-link>
-      <button class="btn btn-outline-success" style="background-color: black; margin-right: 20px" v-if="loggedIn">Logout</button>
+      <router-link :to="{name: 'logout'}"  class="btn btn-outline-success" style="background-color: black; margin-right: 20px" v-if="loggedIn">
+        Logout
+      </router-link>
     </form>
   </nav>
 </template>
 
 <script>
   import MovieSearch from '../components/MovieSearch'
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
 
   export default {
     computed: {
@@ -26,6 +28,6 @@
     },
     components: {
       MovieSearch
-    }
+    },
   }
 </script>

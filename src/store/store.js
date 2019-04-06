@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {authService} from "../services/AuthService";
+import axios from 'axios'
 
 Vue.use(Vuex);
 
@@ -32,7 +33,6 @@ export const store = new Vuex.Store({
       try {
         const response = await authService.login(credentials);
         if (response.acces_token) {
-
           commit('retrieveToken', response.acces_token);
         }
         if (response.error) {
@@ -42,5 +42,9 @@ export const store = new Vuex.Store({
         return e;
       }
     },
+    async logout(context) {
+      await authService.logout(context.state.token);
+      context.commit('destroyToken');
+    }
   }
 });
