@@ -45,6 +45,12 @@ export const store = new Vuex.Store({
     async logout(context) {
       await authService.logout(context.state.token);
       context.commit('destroyToken');
+    },
+    async register(context, credentials) {
+      const response = await authService.register(credentials);
+      if (response.error) {
+        return response.error;
+      }
     }
   }
 });

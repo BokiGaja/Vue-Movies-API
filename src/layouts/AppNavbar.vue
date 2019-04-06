@@ -14,6 +14,9 @@
       <router-link :to="{name: 'logout'}"  class="btn btn-outline-success" style="background-color: black; margin-right: 20px" v-if="loggedIn">
         Logout
       </router-link>
+      <router-link :to="{name: 'register'}" class="btn btn-outline-success" type="button"
+                   style="background-color: black; margin-right: 20px" v-if="!loggedIn">Register
+      </router-link>
     </form>
   </nav>
 </template>

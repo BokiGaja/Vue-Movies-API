@@ -18,11 +18,21 @@ class AuthService {
       return e;
     }
   }
+
   async logout(token) {
     axios.defaults.headers.common['Authorization'] = `Bearer ` + token;
     try {
       const {data} = await auth.post('/logout');
       localStorage.removeItem('token');
+      return data;
+    } catch (e) {
+      return e;
+    }
+  }
+
+  async register(credentials) {
+    try {
+      const {data} = await auth.post('/register', credentials);
       return data;
     } catch (e) {
       return e;
