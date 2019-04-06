@@ -1,5 +1,7 @@
 <template>
-  <div class="card text-center" :style="{margin: '10px auto', backgroundColor: selected ? 'grey' : ''}">
+  <div class="card text-center"
+       :style="{margin: '10px auto', backgroundColor: selected ? 'grey' : '', cursor: 'pointer'}"
+       @click="seeMovie(movie.id)">
     <div class="card-header">
       Director: {{ movie.director }}
     </div>
@@ -9,9 +11,10 @@
       <p class="card-text">Duration: {{ movie.duration }} </p>
       <p class="card-text">Release Date: {{ movie.releaseDate }} </p>
       <p class="card-text">Genre: {{ movie.genre }} </p>
-      <button class="btn btn-primary" @click="selectMovie(movie.id)">
+      <button class="btn btn-primary" @click="selectMovie(movie.id)" v-if="!singleMovie">
         {{ selected ? 'Unselect' : 'Select Movie'}}
       </button>
+      <button class="btn btn-primary" v-if="singleMovie" @click="goBack">Go back</button>
     </div>
   </div>
 </template>
@@ -21,7 +24,8 @@
     name: "MovieRow",
     props: {
       movie: Object,
-      selectedAll: Boolean
+      selectedAll: Boolean,
+      singleMovie: Boolean
     },
     data() {
       return {
@@ -37,6 +41,12 @@
           this.$emit('movieDeselected');
           this.selected = false;
         }
+      },
+      seeMovie(id) {
+        this.$router.push('/movies/' + id)
+      },
+      goBack() {
+        this.$router.push('/movies');
       }
     },
     watch: {

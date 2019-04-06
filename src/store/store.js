@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {authService} from "../services/AuthService";
-import axios from 'axios'
 
 Vue.use(Vuex);
 

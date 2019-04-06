@@ -20,10 +20,10 @@
     <!-- Movies -->
     <ul v-for="(movie, index) in movies" :key="movie.id" v-if="index+1 <= currPage*5 && index+1 > (currPage-1)*5">
       <movie-row
-              :selectedAll="selectedAll"
-              :movie="movie"
-              @movieSelected="moviesCounter++"
-              @movieDeselected="moviesCounter--"
+            :selectedAll="selectedAll"
+            :movie="movie"
+            @movieSelected="moviesCounter++"
+            @movieDeselected="moviesCounter--"
       />
     </ul>
     <div class="container">
