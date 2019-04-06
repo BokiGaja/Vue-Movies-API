@@ -1,0 +1,23 @@
+import axios from 'axios'
+
+const auth = axios.create({
+  baseURL: 'http://localhost:8000/api/auth'
+});
+
+class AuthService {
+  async login(credentials) {
+    try {
+      const {data} = await auth.post('/login', credentials);
+      if (data.acces_token) {
+        const token = data.acces_token;
+        localStorage.setItem('token', token);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      }
+      return data;
+    } catch (e) {
+      return e;
+    }
+  }
+}
+
+export const authService = new AuthService();
