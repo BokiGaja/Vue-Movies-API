@@ -26,9 +26,30 @@ Vue.prototype.$sortArrAlphabetically = ((property, type) => {
     }
   }
 });
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.getters.loggedIn) {
+      next({
+        name: 'login',
+      })
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresGuest)) {
+    if (store.getters.loggedIn) {
+      next({
+        name: 'movies',
+      })
+    } else {
+      next()
+    }
+  } else {
+    next();
+  }
+});
 
 new Vue({
   store,
   router,
   render: h => h(App),
-}).$mount('#app')
+}).$mount('#app');
